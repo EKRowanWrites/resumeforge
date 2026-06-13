@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Forge - ATS-Optimized Resumes That Win</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+                'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+                sans-serif;
+            background: linear-gradient(135deg, #0a1410 0%, #0f1f1a 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 15, 15, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 2rem;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(76, 175, 80, 0.2);
+        }
+
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #4caf50;
+            letter-spacing: 2px;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 4rem 2rem;
+            text-align: center;
+            min-height: calc(100vh - 80px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(76, 175, 80, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #4caf50, #66bb6a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #b0b0b0;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, #4caf50, #66bb6a);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(76, 175, 80, 0.6);
+        }
+
+        /* About Section */
+        .about {
+            padding: 4rem 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            margin-bottom: 6rem;
+        }
+
+        .about h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #4caf50;
+        }
+
+        .about p {
+            font-size: 1.05rem;
+            color: #c0c0c0;
+            margin-bottom: 1.5rem;
+            line-height: 1.9;
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #4caf50;
+            font-weight: 700;
+        }
+
+        /* Before/After Card */
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 3rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            border-color: rgba(76, 175, 80, 0.6);
+            box-shadow: 0 20px 60px rgba(76, 175, 80, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .card-header {
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(56, 142, 60, 0.1));
+            border-bottom: 1px solid rgba(76, 175, 80, 0.2);
+        }
+
+        .card-header h3 {
+            color: #4caf50;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .card-header p {
+            color: #909090;
+            font-size: 0.95rem;
+        }
+
+        .card-content {
+            padding: 2rem;
+        }
+
+        .before-after {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .before-after {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .profile-section {
+            padding: 1.5rem;
+            border-radius: 10px;
+            transition: all 0.4s ease;
+        }
+
+        .before {
+            background: rgba(100, 100, 100, 0.2);
+            border: 1px solid rgba(150, 150, 150, 0.3);
+        }
+
+        .after {
+            background: rgba(76, 175, 80, 0.1);
+            border: 1px solid rgba(76, 175, 80, 0.5);
+        }
+
+        .profile-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .before .profile-label {
+            color: #909090;
+        }
+
+        .after .profile-label {
+            color: #4caf50;
+        }
+
+        .profile-text {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: #d0d0d0;
+            margin-bottom: 1rem;
+        }
+
+        .why-works {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+            border-left: 3px solid #4caf50;
+        }
+
+        .why-works h4 {
+            color: #4caf50;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        .why-works ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .why-works li {
+            color: #b0b0b0;
+            font-size: 0.9rem;
+            margin-bottom: 0.7rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .why-works li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #4caf50;
+            font-weight: bold;
+        }
+
+        /* Tips Section */
+        .tips {
+            padding: 4rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            margin-bottom: 4rem;
+        }
+
+        .tips h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: #4caf50;
+        }
+
+        .tip-item {
+            margin-bottom: 2.5rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(76, 175, 80, 0.2);
+        }
+
+        .tip-item:last-child {
+            border-bottom: none;
+        }
+
+        .tip-number {
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #4caf50;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .tip-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .tip-example {
+            margin: 1.2rem 0;
+            padding: 1.2rem;
+            background: rgba(100, 100, 100, 0.15);
+            border-radius: 8px;
+            border-left: 3px solid #ff6b6b;
+        }
+
+        .tip-example.bad {
+            border-left-color: #ff6b6b;
+        }
+
+        .tip-example.good {
+            border-left-color: #66bb6a;
+        }
+
+        .tip-example-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .tip-example.bad .tip-example-label {
+            color: #ff6b6b;
+        }
+
+        .tip-example.good .tip-example-label {
+            color: #66bb6a;
+        }
+
+        .tip-example-text {
+            font-style: italic;
+            color: #c0c0c0;
+        }
+
+        .tip-why {
+            color: #a0a0a0;
+            font-size: 0.95rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(76, 175, 80, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 2rem;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.02);
+            border-top: 1px solid rgba(76, 175, 80, 0.2);
+            margin-top: 6rem;
+        }
+
+        footer p {
+            color: #808080;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-cta {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, #4caf50, #66bb6a);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+        }
+
+        .footer-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.4);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 10px 30px rgba(76, 175, 80, 0.4);
+            }
+            50% {
+                box-shadow: 0 10px 40px rgba(76, 175, 80, 0.6);
+            }
+        }
+
+        .pulse {
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                margin-top: 60px;
+                padding: 2rem 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .portfolio,
+            .about,
+            .tips {
+                padding: 2.5rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">RESUME FORGE</div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Your Resume Deserves Better</h1>
+            <p>Generic resumes get generic callbacks. I'll transform your experience into results that hiring managers can't ignore.</p>
+            <a href="https://www.fiverr.com/ek_rowan" target="_blank" class="cta-button pulse">Optimize Your Resume</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about fade-in">
+        <h2>Why This Works</h2>
+        <p>Your resume has 6 seconds. Recruiters don't care about your tasks. They care about your impact. The difference between a generic resume and a compelling one isn't luck—it's strategy.</p>
+        <p>I spent nearly a decade in banking underwriting deals where the difference between a "yes" and a "no" came down to how effectively you presented your case. Those same principles apply to your resume.</p>
+        <p><strong>The goal isn't to exaggerate. It's to quantify what you've actually accomplished and frame it in terms hiring managers understand: business impact.</strong></p>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio">
+        <h2 class="section-title">See the Transformation</h2>
+
+        <!-- Card 1: Finance -->
+        <div class="card fade-in">
+            <div class="card-header">
+                <h3>Mid-Level Finance Professional</h3>
+                <p>From task-list to business impact</p>
+            </div>
+            <div class="card-content">
+                <div class="before-after">
+                    <div class="profile-section before">
+                        <div class="profile-label">❌ Before</div>
+                        <div class="profile-text">
+                            Analyzed financial data and prepared reports. Assisted in budgeting and forecasting. Managed spreadsheets and databases. Communicated with stakeholders. Performed quarterly reconciliations.
+                        </div>
+                    </div>
+                    <div class="profile-section after">
+                        <div class="profile-label">✓ After</div>
+                        <div class="profile-text">
+                            Designed and implemented automated financial forecasting model reducing month-end close time by 35%. Led quarterly budget review for 8-department portfolio totaling $47M; identified $2.3M in cost optimization opportunities. Developed dynamic cash flow analysis dashboard used by C-suite for strategic planning.
+                        </div>
+                    </div>
+                </div>
+                <div class="why-works">
+                    <h4>Why This Works</h4>
+                    <ul>
+                        <li>Leads with quantifiable business impact (35% efficiency, $2.3M identified)</li>
+                        <li>Shows scope and scale of responsibility</li>
+                        <li>Demonstrates progression from execution to strategic influence</li>
+                        <li>Uses power verbs (designed, implemented, engineered)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 2: Tech Leadership -->
+        <div class="card fade-in">
+            <div class="card-header">
+                <h3>Senior Tech Leadership</h3>
+                <p>From managing tasks to leading transformation</p>
+            </div>
+            <div class="card-content">
+                <div class="before-after">
+                    <div class="profile-section before">
+                        <div class="profile-label">❌ Before</div>
+                        <div class="profile-text">
+                            Managed engineering team of 6 developers. Oversaw project deliverables and timelines. Conducted code reviews. Coordinated with product and design teams. Implemented process improvements.
+                        </div>
+                    </div>
+                    <div class="profile-section after">
+                        <div class="profile-label">✓ After</div>
+                        <div class="profile-text">
+                            Built and scaled engineering team from 2 to 6 engineers with 100% promotion-to-senior track record. Led platform migration (legacy monolith → microservices) reducing infrastructure costs by $400K annually. Improved deployment frequency from monthly to weekly; reduced production incidents by 64%. Architected real-time data pipeline serving 50M+ daily events, enabling revenue stream worth $1.2M ARR.
+                        </div>
+                    </div>
+                </div>
+                <div class="why-works">
+                    <h4>Why This Works</h4>
+                    <ul>
+                        <li>Demonstrates people leadership at scale (team growth, talent development)</li>
+                        <li>Shows financial acumen ($400K savings, $1.2M revenue impact)</li>
+                        <li>Includes operational wins (64% incident reduction, weekly deployments)</li>
+                        <li>Proves technical credibility + business thinking</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 3: Healthcare -->
+        <div class="card fade-in">
+            <div class="card-header">
+                <h3>Mid-Level Healthcare Professional</h3>
+                <p>From clinical duties to clinical leadership</p>
+            </div>
+            <div class="card-content">
+                <div class="before-after">
+                    <div class="profile-section before">
+                        <div class="profile-label">❌ Before</div>
+                        <div class="profile-text">
+                            Provided patient care in ICU setting. Monitored patient vital signs. Documented patient information. Collaborated with doctors and medical staff. Helped with patient education.
+                        </div>
+                    </div>
+                    <div class="profile-section after">
+                        <div class="profile-label">✓ After</div>
+                        <div class="profile-text">
+                            Led daily operations for 18-bed ICU; managed 24-hour staffing and clinical protocols. Developed sepsis early-warning protocol reducing 30-day mortality rate by 23%. Spearheaded quality improvement initiative reducing hospital-acquired infections by 41%. Mentored 4 nurses through RN certification; 3 promoted within 12 months. Achieved 94% patient satisfaction rating (8-point improvement from baseline).
+                        </div>
+                    </div>
+                </div>
+                <div class="why-works">
+                    <h4>Why This Works</h4>
+                    <ul>
+                        <li>Leads with clinical leadership scope (18-bed ICU management)</li>
+                        <li>Shows measurable patient outcomes (23% mortality reduction, 41% infection reduction)</li>
+                        <li>Demonstrates people development and quality focus</li>
+                        <li>Balances technical competency with leadership responsibility</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tips Section -->
+    <section class="tips">
+        <h2>5 Things That Tank Your Resume</h2>
+
+        <div class="tip-item">
+            <div class="tip-number">1. Listing Tasks Instead of Showing Impact</div>
+            <div class="tip-title">Tasks Don't Get Hired. Impact Does.</div>
+            <div class="tip-example bad">
+                <div class="tip-example-label">❌ Ruins It</div>
+                <div class="tip-example-text">"Responsible for financial analysis. Managed budgets. Updated reports. Worked with stakeholders."</div>
+            </div>
+            <div class="tip-example good">
+                <div class="tip-example-label">✓ Fixes It</div>
+                <div class="tip-example-text">"Identified $2.3M in cost optimization opportunities through advanced variance analysis; implemented recommendations across 8-department portfolio totaling $47M."</div>
+            </div>
+            <div class="tip-why"><strong>Why:</strong> Recruiters care about what changed because of you. Numbers, outcomes, and business value are what get callbacks.</div>
+        </div>
+
+        <div class="tip-item">
+            <div class="tip-number">2. Using Weak Action Verbs</div>
+            <div class="tip-title">Helped, Worked, Participated = Passenger Energy</div>
+            <div class="tip-example bad">
+                <div class="tip-example-label">❌ Ruins It</div>
+                <div class="tip-example-text">"Helped with project management. Worked on team initiatives. Assisted with process improvements."</div>
+            </div>
+            <div class="tip-example good">
+                <div class="tip-example-label">✓ Fixes It</div>
+                <div class="tip-example-text">"Led cross-functional team through $5M platform migration. Architected technical roadmap. Spearheaded efficiency initiative reducing close time by 35%."</div>
+            </div>
+            <div class="tip-why"><strong>Why:</strong> "Led," "architected," and "spearheaded" signal you were the driver, not a passenger.</div>
+        </div>
+
+        <div class="tip-item">
+            <div class="tip-number">3. Generic Descriptions Without Scope or Scale</div>
+            <div class="tip-title">Numbers Tell the Story</div>
+            <div class="tip-example bad">
+                <div class="tip-example-label">❌ Ruins It</div>
+                <div class="tip-example-text">"Managed team. Handled customer service. Oversaw projects. Improved processes."</div>
+            </div>
+            <div class="tip-example good">
+                <div class="tip-example-label">✓ Fixes It</div>
+                <div class="tip-example-text">"Built and scaled engineering team from 2 to 6 engineers with 100% promotion-to-senior track record. Architected CI/CD improvements reducing deployment time from monthly to weekly cycles."</div>
+            </div>
+            <div class="tip-why"><strong>Why:</strong> Numbers (team size, budget, revenue) provide context. Without them, your accomplishments are meaningless.</div>
+        </div>
+
+        <div class="tip-item">
+            <div class="tip-number">4. Burying Your Best Accomplishments</div>
+            <div class="tip-title">Recruiters Skim. Lead With Your Biggest Wins.</div>
+            <div class="tip-example bad">
+                <div class="tip-example-label">❌ Ruins It</div>
+                <div class="tip-example-text">Resume starts with basic responsibilities. Major wins buried at the bottom.</div>
+            </div>
+            <div class="tip-example good">
+                <div class="tip-example-label">✓ Fixes It</div>
+                <div class="tip-example-text">Lead each role with your biggest business impact. Put metrics-driven accomplishments first. Save smaller contributions for later.</div>
+            </div>
+            <div class="tip-why"><strong>Why:</strong> Recruiters read the first 20% before making a decision. Your biggest wins need to be visible immediately.</div>
+        </div>
+
+        <div class="tip-item">
+            <div class="tip-number">5. Mixing Soft Claims With Hard Metrics</div>
+            <div class="tip-title">"Enhanced" Isn't Evidence</div>
+            <div class="tip-example bad">
+                <div class="tip-example-label">❌ Ruins It</div>
+                <div class="tip-example-text">"Improved patient outcomes. Enhanced operational efficiency. Strengthened team capabilities."</div>
+            </div>
+            <div class="tip-example good">
+                <div class="tip-example-label">✓ Fixes It</div>
+                <div class="tip-example-text">"Developed sepsis protocol reducing 30-day ICU mortality by 23%. Implemented hygiene protocols cutting hospital-acquired infections by 41%. Achieved 94% patient satisfaction rating."</div>
+            </div>
+            <div class="tip-why"><strong>Why:</strong> Real metrics prove you delivered. Vague adjectives are just noise.</div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>The Rule That Beats All Others:</strong></p>
+        <p>Your resume works when a hiring manager reads it and thinks, "This person drove real results," not "This person did a lot of things."</p>
+        <p style="margin-top: 2rem; font-size: 0.95rem; color: #909090;">Quantify your impact. Lead with business value. Show scope. Prove results.</p>
+        <a href="https://www.fiverr.com/ek_rowan" target="_blank" class="footer-cta">Transform Your Resume on Fiverr</a>
+        <p style="margin-top: 2rem; font-size: 0.85rem; color: #606060;">© 2026 Resume Forge. Strategic resumes that open doors.</p>
+    </footer>
+
+    <script>
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.card, .about, .tips').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
